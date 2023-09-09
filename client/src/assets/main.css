@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Mynerve&family=Rubik:wght@300&family=Shantell+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+
+/*
+font-family: 'Mynerve', cursive;
+font-family: 'Rubik', sans-serif;
+font-family: 'Shantell Sans', cursive;
+font-family: 'Ubuntu', sans-serif;
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#app {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hidden {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}

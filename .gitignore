@@ -1,0 +1,11 @@
+# Node.nsjs
+node_modules 
+package-lock.json 
+
+# Replit
+.replit 
+replit.nix
+.cache
+
+#Runner
+runner.sh
