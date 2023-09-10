@@ -107,17 +107,9 @@ export default {
     }
   },
   mounted() {
-    socket.connect();
     this.scrollToBottom();
   },
   created() {
-    setTimeout(() => {
-    if(this.threadID) {
-      socket.emit('join-thread', this.threadID);
-    } else {
-      window.location.href = '/chats';
-    }
-    }, 500)
     socket.on('receive-message', (msg) => {
       
     })

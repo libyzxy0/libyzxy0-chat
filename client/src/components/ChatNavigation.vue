@@ -85,11 +85,11 @@ nav {
   height: 2.7rem;
   border-radius: 50%;
   margin-left: 10px;
-  border: 2px solid #2bff82;
+  border: 1px solid #333;
 }
 .circular-nav .left h1 {
   font-family: 'Rubik', sans-serif;
-  font-size: 22px;
+  font-size: 19px;
   color: #333;
   margin-left: 8px;
   font-weight: 500;

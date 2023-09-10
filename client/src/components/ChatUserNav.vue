@@ -62,8 +62,9 @@ nav {
 }
 .left h1 {
   margin-left: 10px;
-  font-size: 19px;
+  font-size: 18px;
   font-family: 'Rubik', sans-serif;
+  font-weight: 500;
 }
 .right {
   position: relative;

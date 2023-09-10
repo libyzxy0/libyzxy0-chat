@@ -8,7 +8,7 @@ defineProps({
 })
 </script>
 <template>
-  <div @click="$router.push(`/chat/${thread}`)" class="card">
+  <div @click="handleClick()" class="card">
     <div class="left">
       <img :src="image" :alt="name" />
       <div class="infos">
@@ -64,11 +64,11 @@ defineProps({
   flex-direction: column;
 }
 .left .infos h1 {
-  font-size: 18px;
+  font-size: 17px;
   position: relative;
   font-family: 'Ubuntu', sans-serif;
   top: 0.6rem;
-  font-weight: 900;
+  font-weight: 550;
 }
 .infos p {
   position: relative;
@@ -80,3 +80,24 @@ defineProps({
   font-family: 'Rubik', sans-serif;
 }
 </style>
+<script>
+  import socket from '../services/socket.service.js';
+  export default {
+    data() {
+      return {
+        
+      }
+    }, 
+    methods: {
+      handleClick() {
+        this.$router.push(`/chat/${this.thread}`)
+        socket.connect();
+        if(this.thread) {
+          socket.emit('join-thread', this.thread);
+        } else {
+          window.location.href = '/chats';
+        }
+      }
+    }
+  }
+</script>

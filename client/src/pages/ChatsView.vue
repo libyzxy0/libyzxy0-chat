@@ -10,10 +10,17 @@ import ChatCard from '../components/ChatUserCard.vue'
   <div class="container">
     <ChatCard
       name="Jan Liby Dela Costa"
-      sub="Hahahaha yu..."
-      time="10:00"
+      sub="Sheeshhh"
+      time="7:00"
       thread="100382"
       image="https://graph.facebook.com/100081144393297/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662"
+    />
+    <ChatCard
+      name="Mark Zuckerberg"
+      sub="Hello"
+      time="8:00"
+      thread="100382"
+      image="https://graph.facebook.com/4/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662"
     />
   </div>
 </template>
