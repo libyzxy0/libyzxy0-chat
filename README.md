@@ -1,6 +1,7 @@
 # A Chat Application 
-Project by Jan Liby Dela Costa (libyzxy0)
+A fast, secure and user friendly chatting web application, using vuejs, and socket.io.
 
+**Project by Jan Liby Dela Costa (libyzxy0)**
 # Contributing
 
 Contributions are welcome to this project! If you'd like to contribute to libyzxy0 Chat application, please follow these steps:
