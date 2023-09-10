@@ -1,11 +1,11 @@
 <script setup>
-  defineProps({
-    threadID: { type: String, required: true }, 
-    uid: { type: String, required: true }, 
-  })
+defineProps({
+  threadID: { type: String, required: true },
+  uid: { type: String, required: true }
+})
 </script>
 <template>
-  <h1>Data: {{ s }} : {{threadID}}</h1>
+
   <div class="chatbox">
     <textarea v-model="message" placeholder="Write a message..."></textarea>
     <div class="action">
@@ -87,7 +87,7 @@ textarea:focus {
 }
 .action button {
   background-color: transparent;
-  width: 1.6rem;
+  width: 1.5rem;
   border: none;
   display: flex;
   justify-content: center;
@@ -99,7 +99,7 @@ textarea:focus {
 }
 </style>
 <script>
-import socket from '../services/socket.service.js';
+import socket from '../services/socket.service.js'
 export default {
   data() {
     return {
@@ -107,18 +107,36 @@ export default {
     }
   },
   mounted() {
-    this.scrollToBottom();
+    this.scrollToBottom()
   },
-  created() {
-    socket.on('receive-message', (msg) => {
-      
-    })
-  }, 
+  created() {},
   methods: {
     sendMessage(uid) {
-      socket.emit('send-message', {
-        message: this.message
-      }, this.threadID)
+      socket.emit(
+        'send-message',
+        {
+          messageID: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+          sender: {
+            userId: '',
+            username: '',
+            avatarUrl: ''
+          },
+          text: 'This is the message text.',
+          timestamp: Date.now(),
+          status: 'sent',
+          attachments: [
+            {
+              type: 'image',
+              url: 'image_url.jpg'
+            },
+            {
+              type: 'video',
+              url: 'video_url.mp4'
+            }
+          ]
+        },
+        this.threadID
+      )
       //Re initialized Functions
       this.scrollToBottom()
       this.message = ''

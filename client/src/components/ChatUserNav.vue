@@ -31,6 +31,8 @@ defineProps({
 </template>
 <style scoped>
 nav {
+  position: fixed;
+  top: 0;
   height: 4rem;
   width: 100%;
   box-shadow:
@@ -38,6 +40,8 @@ nav {
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   display: flex;
   align-items: center;
+  z-index: 5;
+  background-color: #ffffff;
 }
 .left {
   position: relative;

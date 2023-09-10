@@ -81,23 +81,21 @@ defineProps({
 }
 </style>
 <script>
-  import socket from '../services/socket.service.js';
-  export default {
-    data() {
-      return {
-        
-      }
-    }, 
-    methods: {
-      handleClick() {
-        this.$router.push(`/chat/${this.thread}`)
-        socket.connect();
-        if(this.thread) {
-          socket.emit('join-thread', this.thread);
-        } else {
-          window.location.href = '/chats';
-        }
+import socket from '../services/socket.service.js'
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    handleClick() {
+      this.$router.push(`/chat/${this.thread}`)
+      socket.connect()
+      if (this.thread) {
+        socket.emit('join-thread', this.thread)
+      } else {
+        window.location.href = '/chats'
       }
     }
   }
+}
 </script>
