@@ -1,8 +1,6 @@
 <script>
-  defineProps({
-    isHidden: { type: String, required: false }
-  })
+defineProps({
+  isHidden: { type: String, required: false }
+})
 </script>
-<template>
-  
-</template>
+<template></template>

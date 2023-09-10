@@ -1,8 +1,8 @@
 <script setup>
-  defineProps({
-    name: { type: String, required: true }, 
-    image: { type: String, required: true }
-  })
+defineProps({
+  name: { type: String, required: true },
+  image: { type: String, required: true }
+})
 </script>
 <template>
   <div id="body">

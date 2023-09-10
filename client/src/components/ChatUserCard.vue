@@ -3,7 +3,7 @@ defineProps({
   name: { type: String, required: true },
   sub: { type: String, required: true },
   time: { type: String, required: true },
-  thread: { type: String, required: true }, 
+  thread: { type: String, required: true },
   image: { type: String, required: true }
 })
 </script>
