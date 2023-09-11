@@ -3,13 +3,11 @@ const router = express.Router();
 const {
   login,
   signup,
-  verify,
-  logout
+  verify
 } = require('../controllers/handleAuth');
 
-router.route('/login').post(login)
-router.route('/signup').post(signup)
-router.route('/verify').post(verify)
-router.route('/logout').post(logout)
+router.route('/auth/login').post(login)
+router.route('/auth/signup').post(signup)
+router.route('/auth/verify').post(verify)
 
 module.exports = router;

@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-const participantSchema = new mongoose.Schema({
-	userID: {
-		type: String,
-		required: true
-	},
-	username: {
-		type: String,
-		required: true
-	}
-});
-
 const attachmentSchema = new mongoose.Schema({
 	type: String,
 	url: String,
@@ -37,16 +26,18 @@ const userSchema = new mongoose.Schema({
 		required: true
 	},
 	lastName: String,
-	status: {
-		type: String,
-		required: true
-	},
+  accountConfirmed: Boolean, 
+  email: {
+    type: String, 
+    required: true
+  }, 
+	status: String,
 	bio: String
 });
 
 const messageSchema = new mongoose.Schema({
 	type: String,
-	messageId: {
+	messageID: {
 		type: String,
 		required: true,
 		unique: true
@@ -62,6 +53,17 @@ const messageSchema = new mongoose.Schema({
 		},
 		avatarUrl: String
 	},
+  recipient: {
+    userID: {
+			type: String,
+			required: true
+		},
+		username: {
+			type: String,
+			required: true
+		},
+		avatarUrl: String
+  }, 
 	text: String,
 	timestamp: {
 		type: Number,
@@ -71,21 +73,7 @@ const messageSchema = new mongoose.Schema({
 	attachments: [attachmentSchema]
 });
 
-const threadSchema = new mongoose.Schema({
-	threadID: {
-		type: String,
-		unique: true
-	},
-	participants: [participantSchema],
-	messages: [messageSchema],
-	lastActivityTimestamp: {
-		type: Number,
-		required: true
-	}
-});
-
 module.exports = {
 	User: mongoose.model('User', userSchema),
-	Thread: mongoose.model('Thread', threadSchema),
 	Message: mongoose.model('Message', messageSchema)
 };

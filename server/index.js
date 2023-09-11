@@ -4,6 +4,8 @@ const cors = require('cors');
 const http = require('http').createServer(app);
 const port = process.env.PORT || 3000;
 const router = require('./router');
+const connectDB = require('./database/connect');
+const db = require('./database/db');
 const connectSocket = require('./controllers/webSocketConn');
 const io = require('socket.io')(http, {
   cors: {
@@ -15,9 +17,24 @@ const io = require('socket.io')(http, {
 (async () => {
   try {
     await connectSocket(io);
-    console.log('WebSocket has been initialized!');
+    await connectDB(process.env.MONGODB_CONNECTION_URI);
+    console.log('WebSocket and Database has been initialized!');
+/*
+    db.createUser({
+      username: 'libyzxy0', 
+      userID: Math.floor(100000000000000 + Math.random() * 900000000000000).toString(), 
+      firstName: 'Jan Liby', 
+      lastName: 'Dela Costa', 
+      email: 'janlibydelacosta@gmail.com', 
+      password: 'libyzxy0123', 
+      accountConfirmed: true, 
+      status: 'offline', 
+      bio: ''
+    }).then(r => console.log(r))
+    */
+    
   } catch (err) {
-    console.error("Error while initializing WebSocket: ", err);
+    console.error("Error while initializing Database, and WebSocket:", err);
   }
 })();
 
@@ -34,6 +51,7 @@ app.use(function (req, res, next) {
 
 // Router
 app.use('/', router);
+
 
 http.listen(port, () => {
   console.log(`Application is listening on port ${port}`);

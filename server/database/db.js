@@ -1,4 +1,4 @@
-const { User, Thread, Message } = require('./models');
+const { User, Thread } = require('./models');
 
 //User Crud Operations
 async function createUser(inputData) {
@@ -53,10 +53,10 @@ async function deleteUser(dataID) {
   })
 }
 
-//Thread Crud Operations
-async function createThread(inputData) {
+//Messag3 Crud Operations
+async function createMessage(inputData) {
   return new Promise((resolve, reject) => {
-    const data = new Thread(inputData);
+    const data = new Message(inputData);
     data.save()
       .then((r) => {
         resolve(r);
@@ -66,7 +66,8 @@ async function createThread(inputData) {
       });
   })
 }
-async function readThreads() {
+
+async function readMessages() {
   return new Promise((resolve, reject) => {
     Thread.find()
       .then((result) => {
@@ -77,7 +78,7 @@ async function readThreads() {
       });
   })
 }
-async function updateThread(dataID, newData) {
+async function updateMessage(dataID, newData) {
   return new Promise((resolve, reject) => {
     Thread.findByIdAndUpdate(dataID, newData, { new: true })
       .then((result) => {
@@ -91,62 +92,9 @@ async function updateThread(dataID, newData) {
       });
   })
 }
-async function deleteThread(dataID) {
-  return new Promise((resolve, reject) => {
-    Thread.findByIdAndDelete(dataID)
-      .then((result) => {
-        if (!result) {
-          throw new Error('Data not found');
-        }
-        resolve(result);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  })
-}
-
-//Message Crud Operations
-async function createMessage(inputData) {
-  return new Promise((resolve, reject) => {
-    const data = new Message(inputData);
-    data.save()
-      .then((r) => {
-        resolve(r);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  })
-}
-async function readMessages() {
-  return new Promise((resolve, reject) => {
-    Message.find()
-      .then((result) => {
-        resolve(result);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  })
-}
-async function updateMessage(dataID, newData) {
-  return new Promise((resolve, reject) => {
-    Message.findByIdAndUpdate(dataID, newData, { new: true })
-      .then((result) => {
-        if (!result) {
-          throw new Error('Data not found');
-        }
-        resolve(result);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  })
-}
 async function deleteMessage(dataID) {
   return new Promise((resolve, reject) => {
-    Message.findByIdAndDelete(dataID)
+    Thread.findByIdAndDelete(dataID)
       .then((result) => {
         if (!result) {
           throw new Error('Data not found');
@@ -164,10 +112,6 @@ module.exports = {
   readUsers, 
   updateUser, 
   deleteUser, 
-  createThread, 
-  readThreads, 
-  updateThread, 
-  deleteThread, 
   createMessage, 
   readMessages, 
   updateMessage, 
