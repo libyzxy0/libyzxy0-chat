@@ -1,11 +1,9 @@
 <script setup>
 defineProps({
-  threadID: { type: String, required: true },
-  uid: { type: String, required: true }
+  username: { type: String, required: true }
 })
 </script>
 <template>
-
   <div class="chatbox">
     <textarea v-model="message" placeholder="Write a message..."></textarea>
     <div class="action">
@@ -109,37 +107,42 @@ export default {
   mounted() {
     this.scrollToBottom()
   },
-  created() {},
+  created() {
+    this.fetchUserInfo()
+  },
   methods: {
-    sendMessage(uid) {
-      socket.emit(
-        'send-message',
-        {
-          messageID: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
-          sender: {
-            userId: '',
-            username: '',
-            avatarUrl: ''
-          },
-          text: 'This is the message text.',
-          timestamp: Date.now(),
-          status: 'sent',
-          attachments: [
-            {
-              type: 'image',
-              url: 'image_url.jpg'
-            },
-            {
-              type: 'video',
-              url: 'video_url.mp4'
-            }
-          ]
+    async fetchUserInfo(username) {
+      const response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         },
-        this.threadID
-      )
-      //Re initialized Functions
+        body: JSON.stringify({
+          username: username
+        })
+      })
+      let user = await response.json()
+      return user
+    },
+    async sendMessage(uid) {
+      if (!this.message) {
+        alert('Error')
+        return
+      }
+      const userInfo = await this.fetchUserInfo(this.username)
+      socket.emit('event', {
+        type: 'message',
+        sender: {
+          token: this.$cookie.getCookie('token')
+        },
+        recipient: {
+          username: userInfo.username,
+          userID: userInfo.userID
+        },
+        body: this.message
+      })
+      this.message = '';
       this.scrollToBottom()
-      this.message = ''
     },
     scrollToBottom() {
       window.scrollTo(0, document.body.scrollHeight)

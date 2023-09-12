@@ -153,9 +153,26 @@ export default {
     }
   },
   mounted() {
+    this.checkLogin()
     this.observeIntersection()
   },
   methods: {
+    async checkLogin() {
+      let token = this.$cookie.getCookie('token')
+        const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          token: token
+        })
+      })
+      let user = await response.json()
+        if(user.code == 200) {
+          this.$router.push('/chats')
+        }
+    }, 
     observeIntersection() {
       this.observer = new IntersectionObserver(
         (entries) => {
