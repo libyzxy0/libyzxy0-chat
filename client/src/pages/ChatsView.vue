@@ -59,7 +59,7 @@ import ChatCard from '../components/ChatUserCard.vue'
       }
     }, 
     async fetchUsers() {
-      const response = await fetch('https://chat-b.libyzxy0.repl.co/api/users', {
+      const response = await fetch('https://chat-b.libyzxy0.repl.co/api/get-users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
