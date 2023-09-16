@@ -200,21 +200,21 @@ export default {
   methods: {
     async checkLogin() {
       let token = this.$cookie.getCookie('token')
-      if(!token) {
+      if (!token) {
         this.$router.push('/login')
       } else {
         const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username,
-          password
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username,
+            password
+          })
         })
-      })
-      let user = await response.json()
-        if(user.code == 200) {
+        let user = await response.json()
+        if (user.code == 200) {
           this.$router.push('/chats')
         }
       }

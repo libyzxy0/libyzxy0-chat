@@ -141,7 +141,7 @@ export default {
         },
         body: this.message
       })
-      this.message = '';
+      this.message = ''
       this.scrollToBottom()
     },
     scrollToBottom() {

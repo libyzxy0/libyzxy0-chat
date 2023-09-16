@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$router.push(`/chat/${this.thread}`) 
+      this.$router.push(`/chat/${this.thread}`)
     }
   }
 }

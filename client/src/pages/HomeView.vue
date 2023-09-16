@@ -159,7 +159,7 @@ export default {
   methods: {
     async checkLogin() {
       let token = this.$cookie.getCookie('token')
-        const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
+      const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -169,10 +169,10 @@ export default {
         })
       })
       let user = await response.json()
-        if(user.code == 200) {
-          this.$router.push('/chats')
-        }
-    }, 
+      if (user.code == 200) {
+        this.$router.push('/chats')
+      }
+    },
     observeIntersection() {
       this.observer = new IntersectionObserver(
         (entries) => {
