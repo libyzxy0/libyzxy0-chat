@@ -7,7 +7,6 @@ import Message from '../components/MessagesComponent.vue'
   <NavBar
     :name="`${userInfo.firstName} ${userInfo.lastName}`"
     :image="`https://api.nilskoepke.com/profile-image?name=${userInfo.firstName}+${userInfo.lastName}&backgroundColor=rgb(33,194,87)`"
-    :name="`${userInfo.firstName} ${userInfo.lastName}`"
   />
   <div class="chats">
     <Message
