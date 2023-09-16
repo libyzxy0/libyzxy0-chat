@@ -12,10 +12,10 @@ import Message from '../components/MessagesComponent.vue'
     <Message
       v-for="(message, index) in messages"
       :key="index"
-      :user="message.sender.userID === userInfo.userID ? 'me' : 'other'"
-      :username="message.sender.username"
+      :user="message.recipient.userID === userInfo.userID ? 'other' : 'me'"
+      :username="message.recipient.userID === userInfo.userID ? message.recipient.username : message.sender.username"
       :text="message.body"
-      :time="`${new Date(message.timezone)}`"
+      :time="`${new Date(message.timestamp).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`"
     />
   </div>
   <ChatBox :username="$route.params.id" />
@@ -58,6 +58,7 @@ export default {
     socket.connect();
   },
   async created() {
+    if(this.$route.params.id) {
     await this.login()
     await this.getUserInfo()
     // Make an API request using fetch()
@@ -84,26 +85,26 @@ export default {
     .catch((error) => {
       console.error('Error fetching messages:', error);
     });
+     } 
   },
   methods: {
     async getUserInfo() {
-      let response = await fetch('https://chat-b.libyzxy0.repl.co/api/get-users', {
+      let response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
           method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        token: this.$cookie.getCookie('token'), // Replace with your token
+        username: this.$route.params.id
       })
         });
         let res = await response.json();
-        if(res.code == 200) {
-          this.currentUserInfo = res.data;
+        if(res.code != 400) {
+          this.userInfo = res;
         } else {
           this.$router.push('/login');
         }
-  }
-    }, 
+  }, 
     async login() {
         let response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
           method: 'POST',
