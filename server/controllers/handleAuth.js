@@ -2,12 +2,24 @@ const db = require('../database/db');
 const jwt = require('../handler/JWT');
 async function login(req, res) {
   const { username, password } = req.body;
+  console.log(req.body)
   try {
     let users = await db.readUsers();
     let user = users.find((user) => user.username === username || user.email === username);
     if(user) {
       if(user.password === password) {
-        let token = jwt.generateToken(user, '3d');
+        console.log(user)
+        let token = jwt.generateToken({
+          username: user.username, 
+          userID: user.userID, 
+          firstName: user.firstName, 
+          lastName: user.lastName, 
+          password: user.password, 
+          accountConfirmed: user.accountConfirmed, 
+          email: user.email, 
+          status: user.status,
+          bio: user.bio
+        }, '3d');
         res.send({ code: 200, message: "loggedin", token })
       } else {
         res.send({ code: 401, message: "wrong password", token: null })
@@ -46,7 +58,7 @@ async function signup(req, res) {
 async function verify(req, res) {
   let token = req.body.token;
   let data = jwt.verifyToken(token)
-  if(!!data.username) {
+  if(!!data) {
     res.send({ code: 200, data })
   } else {
     res.send({ code: 401, data: null })

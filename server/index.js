@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const http = require('http').createServer(app);
 const port = process.env.PORT || 3000;
-const router = require('./router');
+const router = require('./router/route');
 const connectDB = require('./database/connect');
 const db = require('./database/db');
 const connectSocket = require('./controllers/webSocketConn');
@@ -21,11 +21,11 @@ const io = require('socket.io')(http, {
     console.log('WebSocket and Database has been initialized!');
 /*
     db.createUser({
-      username: 'libyzxy0', 
+      username: 'testuser1', 
       userID: Math.floor(100000000000000 + Math.random() * 900000000000000).toString(), 
-      firstName: 'Jan Liby', 
-      lastName: 'Dela Costa', 
-      email: 'janlibydelacosta@gmail.com', 
+      firstName: 'Test', 
+      lastName: 'User One', 
+      email: 'test@gmail.com', 
       password: 'libyzxy0123', 
       accountConfirmed: true, 
       status: 'offline', 
@@ -39,6 +39,7 @@ const io = require('socket.io')(http, {
 })();
 
 // Middlewares
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,4 +1,4 @@
-const { User, Thread } = require('./models');
+const { User, Message } = require('./models');
 
 //User Crud Operations
 async function createUser(inputData) {
@@ -69,7 +69,7 @@ async function createMessage(inputData) {
 
 async function readMessages() {
   return new Promise((resolve, reject) => {
-    Thread.find()
+    Message.find()
       .then((result) => {
         resolve(result);
       })
@@ -80,7 +80,7 @@ async function readMessages() {
 }
 async function updateMessage(dataID, newData) {
   return new Promise((resolve, reject) => {
-    Thread.findByIdAndUpdate(dataID, newData, { new: true })
+    Message.findByIdAndUpdate(dataID, newData, { new: true })
       .then((result) => {
         if (!result) {
           throw new Error('Data not found');
@@ -94,7 +94,7 @@ async function updateMessage(dataID, newData) {
 }
 async function deleteMessage(dataID) {
   return new Promise((resolve, reject) => {
-    Thread.findByIdAndDelete(dataID)
+    Message.findByIdAndDelete(dataID)
       .then((result) => {
         if (!result) {
           throw new Error('Data not found');

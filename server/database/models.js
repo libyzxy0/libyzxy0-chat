@@ -64,7 +64,7 @@ const messageSchema = new mongoose.Schema({
 		},
 		avatarUrl: String
   }, 
-	text: String,
+	body: String,
 	timestamp: {
 		type: Number,
 		required: true

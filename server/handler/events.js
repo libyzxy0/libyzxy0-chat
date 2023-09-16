@@ -33,8 +33,8 @@ module.exports = async ({ event, conn }) => {
         userID: verifyToken(event.sender.token).userID ? verifyToken(event.sender.token).userID : null 
       },
       recipient: {
-        username: event.recipient.username, 
-        userID: event.recipient.userID
+        username: event.recipient.username ? event.recipient.username : null, 
+        userID: event.recipient.userID ? event.recipient.userID : null
       }, 
       body: typeof(event.body) == 'object' ? event.body.body : event.body, 
       status: 'sent', 
@@ -43,8 +43,10 @@ module.exports = async ({ event, conn }) => {
     }
     db.createMessage(messageData)
     conn.io.emit('receive-event', messageData)
+    console.log(messageData)
   }
    } catch (err) {
+    console.log(err)
     conn.socket.emit('server-err', err.message)
    }
 }
