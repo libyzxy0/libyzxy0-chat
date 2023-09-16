@@ -12,8 +12,8 @@ import Message from '../components/MessagesComponent.vue'
     <Message
       v-for="(message, index) in messages"
       :key="index"
-      :user="message.recipient.userID === userInfo.userID ? 'other' : 'me'"
-      :username="message.recipient.userID === userInfo.userID ? message.recipient.username : message.sender.username"
+      :user="message.sender.userID === userInfo.userID ? 'other' : 'me'"
+      :username="message.recipient.userID === userInfo.userID ? message.sender.username : message.recipient.username"
       :text="message.body"
       :time="`${new Date(message.timestamp).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`"
     />
@@ -60,7 +60,8 @@ export default {
   async created() {
     if(this.$route.params.id) {
     await this.login()
-    await this.getUserInfo()
+    await this.getUserInfo() 
+    this.handleEvent()
     // Make an API request using fetch()
     fetch('https://chat-b.libyzxy0.repl.co/api/retrieve-message', {
       method: 'POST',
@@ -88,6 +89,13 @@ export default {
      } 
   },
   methods: {
+    async handleEvent() {
+     socket.on('event', (event) => {
+       if(event.type == 'message') {
+         this.messages.push(event)
+       }
+     })
+    }, 
     async getUserInfo() {
       let response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
           method: 'POST',

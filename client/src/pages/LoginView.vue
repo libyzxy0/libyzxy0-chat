@@ -195,22 +195,21 @@ export default {
     }
   },
   created() {
-    this.checkLogin()
+    this.checklogin()
   },
   methods: {
-    async checkLogin() {
+    async checklogin() {
       let token = this.$cookie.getCookie('token')
       if (!token) {
         this.$router.push('/login')
       } else {
-        const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/login', {
+        const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            username,
-            password
+            token: this.$cookie.getCookie('token')
           })
         })
         let user = await response.json()

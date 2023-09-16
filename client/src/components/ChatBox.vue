@@ -101,7 +101,8 @@ import socket from '../services/socket.service.js'
 export default {
   data() {
     return {
-      message: ''
+      message: '',
+      userInfo: {}
     }
   },
   mounted() {
@@ -111,33 +112,38 @@ export default {
     this.fetchUserInfo()
   },
   methods: {
-    async fetchUserInfo(username) {
+    async fetchUserInfo() {
+      if(this.$route.params.id) {
       const response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: username
+          username: this.$route.params.id
         })
       })
       let user = await response.json()
-      return user
+      if(user.code != 400) {
+        this.userInfo = user;
+      } else {
+        this.$router.push('/chats');
+      }
+       } 
     },
     async sendMessage(uid) {
       if (!this.message) {
         alert('Error')
         return
       }
-      const userInfo = await this.fetchUserInfo(this.username)
-      socket.emit('event', {
+      socket.emit('make event', {
         type: 'message',
         sender: {
           token: this.$cookie.getCookie('token')
         },
         recipient: {
-          username: userInfo.username,
-          userID: userInfo.userID
+          username: this.userInfo.username,
+          userID: this.userInfo.userID
         },
         body: this.message
       })
