@@ -1,42 +1,76 @@
 <template>
   <div class="body">
+    <h1 class="m-title">Join to Chatify</h1>
     <div class="container">
-      <h1>Signup</h1>
       <form @submit.prevent="handleSubmit()">
-        <div class="input-group">
-          <label for="firstname">First Name</label>
-          <input v-model="firstName" type="text" name="firstname" placeholder="Enter First Name" />
+        <div class="view1" :class="view == 1 ? '' : 'hidden'">
+          <h1>Terms and conditions</h1>
+          <p>
+           <h4>Last updated: September 17, 2023</h4> 
+<p>
+This Privacy Policy outlines the information we collect, how we use it, and the choices you have concerning your personal data when you use our chat application. Your privacy is of utmost importance to us, and we are committed to safeguarding your personal information.
+</p>
+<h3>1. Information We Collect</h3>
+<p>
+<b>A</b>. User-Provided Information: We may collect information you provide when you use our application, including but not limited to your name, email address, profile picture, and any messages or content you submit.
+</p>
+          <p>
+<b>B</b>. Automatically Collected Information: We may collect data automatically, such as your IP address, device type, browser type, and usage statistics to improve our service and user experience.
+          </p>
+<h3>2. How We Use Your Information</h3>
+<p>
+<b>A</b>. Personalization: We use your data to personalize your experience within the application, including suggesting contacts and content tailored to your preferences.
+</p>
+          <p>
+<b>B</b>. Communication: We use your contact information to facilitate communication within the app, including sending messages and notifications.
+          </p>
+          <p>
+<b>C</b>. Improvements: Your data helps us analyze usage patterns and make improvements to our application, ensuring it remains secure and efficient.
+          </p>
+          <h3>
+            3. Sharing Your Information
+          </h3>         
+<p>
+  <b>A</b>. Third-Party Services: We may share data with third-party services for analytics, advertising, or other purposes. These third parties are bound by their own privacy policies.
+</p>
+          <p>
+<b>B</b>. Legal Obligations: We may disclose your information if required by law or to protect our rights and the safety of others.
+</p>
+  <h3>4. Data Security</h3>
+<p>
+We employ industry-standard security measures to protect your data from unauthorized access, alteration, disclosure, or destruction.
+</p>
+          <h3>5. Your Choices</h3>
+<p>
+<b>A</b>. Account Deletion: You may delete your account at any time through the application settings.
+</p>
+          <p>
+<b>B</b>. Data Access and Correction: You can access and update your personal information through your account settings.
+          </p>
+          <h3>6. Children's Privacy</h3>
+<p>
+Our application is not intended for children under the age of 13, and we do not knowingly collect data from individuals under 13 years of age.
+</p>
+<h3>7. Changes to this Policy</h3>
+<p>
+We may update this Privacy Policy from time to time. It is your responsibility to review it periodically.
+</p>
+          <h3>8. Contact Us</h3>
+          <p>
+If you have questions or concerns about our Privacy Policy, please contact us at [contact@email.com].
+          </p>
+          <p>
+By using our chat application, you consent to the practices described in this Privacy Policy.
+          </p>
+          </p>
+<button class="button-32" type="button" @click="nextView()">Accept and Continue</button>
+        </div> 
+        <div class="view2" :class="view == 2 ? '' : 'hidden'">
+          <div class="inputs">
+            <input type="text" placeholder="Enter your First Name">
+            <input type="text" placeholder="Enter your Last Name">
+          </div>
         </div>
-        <div class="input-group">
-          <label for="ladtname">Last Name</label>
-          <input v-model="lastName" type="text" name="lastname" placeholder="Enter Last Name" />
-        </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input v-model="email" type="text" name="email" placeholder="Enter Email" />
-        </div>
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input v-model="username" type="text" name="username" placeholder="Enter username" />
-        </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input v-model="password" type="text" name="password" placeholder="Enter password" />
-        </div>
-        <div class="input-group">
-          <button class="button-61" type="submit">Create Account</button>
-        </div>
-        <p>OR</p>
-        <div class="input-group">
-          <button @click="googleSignIn()" class="s-methods">
-            <img
-              style="width: 1.7rem; height: auto; margin-right: 10px"
-              src="https://freesvg.org/img/1534129544.png"
-            />
-            Signup with google
-          </button>
-        </div>
-        <p>Have an account? <a href="signup">Login</a>.</p>
       </form>
     </div>
   </div>
@@ -51,151 +85,101 @@
   right: 0;
   bottom: 0;
 }
-.container {
-  margin: 30px;
-  display: grid;
-  place-items: center;
+.view1 {
   font-family: 'Rubik', sans-serif;
+  margin: 20px;
+  margin-bottom: 2rem;
 }
-p {
-  font-size: 14px;
-  margin-top: 1.5rem;
+.view1 p {
+  margin: 10px 0;
+}
+.view1 h1 {
+  font-size: 28px;
+  font-family: 'Rubik', sans-serif;
+  margin-bottom: 0.5rem;
+  color: #2dd4c0;
+}
+.container {
+  margin: 10px;
+}
+.m-title {
+  text-align: left;
+  font-family: 'Rubik', sans-serif;
+  margin: 25px;
+  font-size: 23px;
+  color: #2dd4c0;
 }
 form {
-  margin-top: 5rem;
+  margin-top: 2rem;
   height: 20rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-  width: 95%;
-}
-label {
-  font-size: 14px;
-}
-input {
-  margin: auto;
-  width: 100%;
-  border: none;
-  background-color: #ffffff;
-  box-shadow:
-    rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  height: 2.9rem;
-  border-radius: 8px;
-  padding: 10px;
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 16px;
-}
-input:focus {
-  outline: none;
-}
 
-.button-61 {
-  align-items: center;
-  margin-top: 0.5rem;
-  appearance: none;
-  border-radius: 4px;
-  border-style: none;
-  box-shadow:
-    rgba(0, 0, 0, 0.2) 0 3px 1px -2px,
-    rgba(0, 0, 0, 0.14) 0 2px 2px 0,
-    rgba(0, 0, 0, 0.12) 0 1px 5px 0;
-  box-sizing: border-box;
-  color: #fff;
+/* CSS */
+.button-32 {
+  background-color: #2dd4c0;
+  border-radius: 7px;
+  color: #000;
   cursor: pointer;
-  display: inline-flex;
-  font-family: 'Rubik', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
-  height: 39px;
-  justify-content: center;
-  letter-spacing: 0.0892857em;
-  line-height: normal;
-  min-width: 64px;
-  outline: none;
-  overflow: visible;
-  padding: 0 16px;
-  position: relative;
+  font-weight: bold;
+  padding: 10px 15px;
   text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  vertical-align: middle;
-  will-change: transform, opacity;
-  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 3rem;
+font-family: 'Rubik', sans-serif;
 }
 
-.button-61:hover {
-  box-shadow:
-    rgba(0, 0, 0, 0.2) 0 2px 4px -1px,
-    rgba(0, 0, 0, 0.14) 0 4px 5px 0,
-    rgba(0, 0, 0, 0.12) 0 1px 10px 0;
-}
-
-.button-61:disabled {
-  background-color: rgba(0, 0, 0, 0.12);
-  box-shadow:
-    rgba(0, 0, 0, 0.2) 0 0 0 0,
-    rgba(0, 0, 0, 0.14) 0 0 0 0,
-    rgba(0, 0, 0, 0.12) 0 0 0 0;
-  color: rgba(0, 0, 0, 0.37);
-  cursor: default;
-  pointer-events: none;
-}
-
-.button-61:not(:disabled) {
-  background-color: #6200ee;
-}
-
-.button-61:focus {
-  box-shadow:
-    rgba(0, 0, 0, 0.2) 0 2px 4px -1px,
-    rgba(0, 0, 0, 0.14) 0 4px 5px 0,
-    rgba(0, 0, 0, 0.12) 0 1px 10px 0;
-}
-
-.button-61:active {
-  box-shadow:
-    rgba(0, 0, 0, 0.2) 0 5px 5px -3px,
-    rgba(0, 0, 0, 0.14) 0 8px 10px 1px,
-    rgba(0, 0, 0, 0.12) 0 3px 14px 2px;
-  background: #a46bf5;
-}
-.s-methods {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
   outline: 0;
-  cursor: pointer;
-  border: none;
-  padding: 0 15px;
-  height: 45px;
-  line-height: 45px;
-  border-radius: 7px;
-  font-weight: 400;
-  font-size: 16px;
-  background: #fff;
-  color: #696969;
-  box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
-  font-family: 'Ubuntu', sans-serif;
+  background:  #2dd4c0;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
-.s-methods:hover {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
+
+.button-32:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+  }
+.inputs {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  width: 100%;
 }
+  input {
+margin-inline: 0.5rem;
+                padding: 6px 13px;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #212529;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                appearance: none;
+                border-radius: 4px;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 10rem;
+   } 
+                input:focus{
+                    color: #212529;
+                    background-color: #fff;
+                    border-color: #86b7fe;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+                }
+                
 </style>
 <script>
 export default {
@@ -206,13 +190,20 @@ export default {
       firstName: '',
       lastName: '', 
       email: '', 
-      isSignWithGoogle: false
+      isSignWithGoogle: false,
+      view: 1
     }
   },
   created() {
     this.checklogin()
   },
   methods: {
+    nextView() {
+    this.view = this.view + 1;
+  }, 
+  prevView() {
+    this.view = this.view - 1;
+  },  
     async checklogin() {
       let token = this.$cookie.getCookie('token')
       if (!token) {

@@ -91,16 +91,27 @@ export default {
       let data = await response.json()
       if (data.code == 200) {
         for (let i = 0; i < data.users.length; i++) {
+          if(data.users[i]) {
           let latestMsg = await this.getLatestMessage(data.users[i].username);
-          console.log(latestMsg)
           this.users.push({
-            firstName: data.users[i].firstName, 
-            lastName: data.users[i].lastName, 
-            username: data.users[i].username, 
-            latestmsg: this.userInfo.userID == latestMsg.sender.userID? `You: ${latestMsg.body}` : latestMsg.body, 
-            latestdate: new Date(latestMsg.timestamp).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-          })
+          firstName: data.users[i].firstName,
+          lastName: data.users[i].lastName,
+          username: data.users[i].username,
+          latestmsg: latestMsg.sender?.userID ? 
+ this.userInfo.userID === latestMsg.sender.userID
+            ? `You: ${latestMsg.body}`
+            : latestMsg.body : 'No conversation',
+          latestdate: latestMsg.timestamp
+            ? new Date(latestMsg.timestamp).toLocaleString('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+              })
+            : '00:00 AM/PM'
+        });
+            //alert(JSON.stringify(data.users[i]))
         }
+         } 
       }
     }
   }
