@@ -105,9 +105,6 @@ export default {
       userInfo: {}
     }
   },
-  mounted() {
-    this.scrollToBottom()
-  },
   created() {
     this.fetchUserInfo()
   },
@@ -148,10 +145,6 @@ export default {
         body: this.message
       })
       this.message = ''
-      this.scrollToBottom()
-    },
-    scrollToBottom() {
-      window.scrollTo(0, document.body.scrollHeight)
     }
   }
 }

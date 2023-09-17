@@ -6,14 +6,14 @@ import Message from '../components/MessagesComponent.vue'
 <template>
   <NavBar
     :name="`${userInfo.firstName} ${userInfo.lastName}`"
-    :image="`https://api.nilskoepke.com/profile-image?name=${userInfo.firstName}+${userInfo.lastName}&backgroundColor=rgb(33,194,87)`"
+    :image="`https://api.nilskoepke.com/profile-image?name=${userInfo.firstName}+${userInfo.lastName}&backgroundColor=rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`"
   />
-  <div class="chats">
+  <div class="chats" ref="messages">
     <Message
       v-for="(message, index) in messages"
       :key="index"
       :user="message.sender.userID === userInfo.userID ? 'other' : 'me'"
-      :username="message.recipient.userID === userInfo.userID ? message.sender.username : message.recipient.username"
+      :username="message.sender.userID === userInfo.userID ? message.sender.username : message.sender.username"
       :text="message.body"
       :time="`${new Date(message.timestamp).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`"
     />
@@ -80,8 +80,8 @@ export default {
       return response.json();
     })
     .then((data) => {
-      console.log(data)
       this.messages = data;
+      this.scrollToBottom()
     })
     .catch((error) => {
       console.error('Error fetching messages:', error);
@@ -89,10 +89,14 @@ export default {
      } 
   },
   methods: {
+    scrollToBottom() {
+      window.scrollTo(0, document.body.scrollHeight)
+  }, 
     async handleEvent() {
      socket.on('event', (event) => {
        if(event.type == 'message') {
          this.messages.push(event)
+         this.scrollToBottom()
        }
      })
     }, 

@@ -61,7 +61,7 @@ nav {
 .left img {
   width: 2.8rem;
   height: 2.8rem;
-  border: 1.5px solid #333;
+  border: 1px solid #333;
   border-radius: 50%;
 }
 .left h1 {
