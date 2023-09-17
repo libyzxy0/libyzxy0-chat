@@ -97,12 +97,12 @@ export default {
           firstName: data.users[i].firstName,
           lastName: data.users[i].lastName,
           username: data.users[i].username,
-          latestmsg: latestMsg.sender?.userID ? 
+          latestmsg: latestMsg?.sender?.userID ? 
  this.userInfo.userID === latestMsg.sender.userID
             ? `You: ${latestMsg.body}`
             : latestMsg.body : 'No conversation',
-          latestdate: latestMsg.timestamp
-            ? new Date(latestMsg.timestamp).toLocaleString('en-US', {
+          latestdate: latestMsg?.timestamp
+            ? new Date(latestMsg?.timestamp).toLocaleString('en-US', {
                 hour: 'numeric',
                 minute: 'numeric',
                 hour12: true
