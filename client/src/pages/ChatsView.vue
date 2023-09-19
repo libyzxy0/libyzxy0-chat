@@ -11,7 +11,6 @@ import ChatCard from '../components/ChatUserCard.vue'
     )},${Math.floor(Math.random() * 256)})`"
     :name="`${userInfo.firstName || 'Fetching...'} ${userInfo.lastName || ''}`"
   />
-  <transition name="fade">
   <div class="container">
     <ChatCard
       v-for="item in users"
@@ -26,19 +25,12 @@ import ChatCard from '../components/ChatUserCard.vue'
       )},${Math.floor(Math.random() * 256)})`"
     />
   </div>
-    </transition>
 </template>
 <style scoped>
 .container {
   padding: 0;
   margin: 120px 0px;
   box-sizing: border-box;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
 }
 </style>
 <script>
