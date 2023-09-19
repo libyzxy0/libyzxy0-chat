@@ -110,23 +110,23 @@ export default {
   },
   methods: {
     async fetchUserInfo() {
-      if(this.$route.params.id) {
-      const response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: this.$route.params.id
+      if (this.$route.params.id) {
+        const response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: this.$route.params.id
+          })
         })
-      })
-      let user = await response.json()
-      if(user.code != 400) {
-        this.userInfo = user;
-      } else {
-        this.$router.push('/chats');
+        let user = await response.json()
+        if (user.code != 400) {
+          this.userInfo = user
+        } else {
+          this.$router.push('/chats')
+        }
       }
-       } 
     },
     async sendMessage(uid) {
       if (!this.message) {
