@@ -51,7 +51,7 @@ export default {
       if (!token) {
         this.$router.push('/login')
       } else {
-        const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
+        const response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/auth/verify', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export default {
       }
     },
     async getLatestMessage(userID) {
-      let response = await fetch('https://chat-b.libyzxy0.repl.co/api/retrieve-message', {
+      let response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/api/retrieve-message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ export default {
       this.users = this.users.sort((a, b) => b.timestamp - a.timestamp);
     }, 
     async fetchUsers() {
-      const response = await fetch('https://chat-b.libyzxy0.repl.co/api/get-users', {
+      const response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/api/get-users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

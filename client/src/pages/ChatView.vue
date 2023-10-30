@@ -113,7 +113,7 @@ export default {
       })
     },
     async getUserInfo() {
-      let response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
+      let response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/api/fetch-user-basic-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ export default {
       }
     },
     async login() {
-      let response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
+      let response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/auth/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

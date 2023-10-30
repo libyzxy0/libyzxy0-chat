@@ -159,7 +159,7 @@ export default {
   methods: {
     async checkLogin() {
       let token = this.$cookie.getCookie('token')
-      const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
+      const response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/auth/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
