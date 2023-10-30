@@ -111,7 +111,7 @@ export default {
   methods: {
     async fetchUserInfo() {
       if (this.$route.params.id) {
-        const response = await fetch('https://chat-b.libyzxy0.repl.co/api/fetch-user-basic-info', {
+        const response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/api/fetch-user-basic-info', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

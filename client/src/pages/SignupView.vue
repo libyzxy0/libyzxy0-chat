@@ -200,7 +200,7 @@ export default {
       if (!token) {
         this.$router.push('/signup')
       } else {
-        const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/verify', {
+        const response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/auth/verify', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -216,7 +216,7 @@ export default {
       }
     }, 
     async login(username, password, firstName, lastName, email, birthday) {
-      const response = await fetch('https://chat-b.libyzxy0.repl.co/auth/signup', {
+      const response = await fetch('https://libyzxy0-chat.libyzxy0.repl.co/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

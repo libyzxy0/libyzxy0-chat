@@ -75,7 +75,7 @@ export default {
       await this.getUserInfo()
       this.handleEvent()
       // Make an API request using fetch()
-      fetch('https://chat-b.libyzxy0.repl.co/api/retrieve-message', {
+      fetch('https://libyzxy0-chat.libyzxy0.repl.co/api/retrieve-message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
