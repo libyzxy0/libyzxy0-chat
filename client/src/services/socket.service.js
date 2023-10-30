@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client'
 
-const socket = io('https://chat-b.libyzxy0.repl.co', {
+const socket = io('https://libyzxy0-chat.libyzxy0.repl.co', {
   autoConnect: false
 })
 
