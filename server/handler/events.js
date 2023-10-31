@@ -42,7 +42,7 @@ module.exports = async ({ event, conn }) => {
       attachments: typeof(event.body) == 'object' ? event.body.attachments : []
     }
     db.createMessage(messageData)
-    conn.io.emit('receive-event', messageData)
+    conn.io.emit('event', messageData)
     console.log(messageData)
   }
    } catch (err) {

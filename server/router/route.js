@@ -33,21 +33,31 @@ router.route('/api/fetch-user-basic-info').post( async(req, res) => {
   }
 })
 router.route('/api/retrieve-message').post(async (req, res) => {
-  let { token, userID } = req.body;
-  let messages = await db.readMessages();
-  let user = jwt.verifyToken(token);
-  let cuserID = user.userID;
+  try {
+    const { token, userID } = req.body;
+    const user = jwt.verifyToken(token);
+    const cuserID = user.username;
+    const messages = await db.readMessages();
+    console.log(cuserID, userID)
 
-  // Filter messages based on sender
-  const filteredMessages = messages.filter((message) =>
-    [cuserID, userID].includes(message.sender.userID)
-  );
+    // Filter messages based on the current user (cuserID) and target recipient (userID)
+    const filteredMessages = messages.filter((message) => {
+      return (
+        (message.sender.username === cuserID && message.recipient.username === userID) ||
+        (message.sender.username === userID && message.recipient.username === cuserID)
+      );
+    });
 
-  // Sort filteredMessages by timestamp in descending order
-  filteredMessages.sort((a, b) => b.timestamp - a.timestamp);
+    // Sort filteredMessages by timestamp in descending order
+    filteredMessages.sort((a, b) => a.timestamp - b.timestamp);
 
-  res.json(filteredMessages);
+    res.json(filteredMessages);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred.' });
+  }
 });
+
 router.route('/api/get-users').post( async(req, res) => {
   let token = req.body.token;
   console.log(token)
